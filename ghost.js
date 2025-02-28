@@ -78,6 +78,5 @@ function animate() {
 
   const delta = clock.getDelta();
   if (mixer) mixer.update(delta);
-
   effect.render(scene, camera);
 }
