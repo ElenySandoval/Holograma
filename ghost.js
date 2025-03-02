@@ -44,7 +44,7 @@ loader.load(
   (object) => {
     MyObj = object;
     MyObj.scale.set(0.14, 0.14, 0.14);
-    MyObj.position.set(0, -20, 0);
+    MyObj.position.set(0, -25, 0);
     scene.add(MyObj);
   },
   function (xhr) {
