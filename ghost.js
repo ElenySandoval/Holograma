@@ -37,22 +37,22 @@ hemiLight.color.setHSL(10, 10, 10);
 hemiLight.position.set(0, 0, 0);
 scene.add(hemiLight);
 
-const loader = new GLTFLoader();
+const loader = new FBXLoader();
 
 loader.load(
-  "model/scene.gltf",
+  "model/OiiaioooooiaiFin.fbx",
   (object) => {
-    MyObj = object.scene;
+    MyObj = object;
     scene.add(MyObj);
-    MyObj.scale.set(0.07, 0.07, 0.07);
+    MyObj.scale.set(0.1, 0.1, 0.1);
     MyObj.position.set(0, 0, 0);
 
-    if (object.animations.length > 0) {
-      mixer = new THREE.AnimationMixer(MyObj);
-      const action = mixer.clipAction(object.animations[0]);
-      mixer.stopAllAction();
-      action.play();
-    }
+    // if (object.animations.length > 0) {
+    //   mixer = new THREE.AnimationMixer(MyObj);
+    //   const action = mixer.clipAction(object.animations[0]);
+    //   mixer.stopAllAction();
+    //   action.play();
+    // }
   },
   function (xhr) {
     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -71,12 +71,9 @@ function onWindowResize() {
 }
 
 // Animaciones
-const clock = new THREE.Clock();
-
 function animate() {
-  requestAnimationFrame(animate);
-
-  const delta = clock.getDelta();
-  if (mixer) mixer.update(delta);
+  if (MyObj) {
+    MyObj.rotation.y += 0.02;
+  }
   effect.render(scene, camera);
 }
