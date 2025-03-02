@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { PeppersGhostEffect } from "three/addons/effects/PeppersGhostEffect.js";
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 let container;
 
@@ -18,7 +17,7 @@ container.appendChild(renderer.domElement);
 //Se crea el efecto PeppersGhost
 effect = new PeppersGhostEffect(renderer);
 effect.setSize(window.innerWidth, window.innerHeight);
-effect.cameraDistance = 10;
+effect.cameraDistance = 12;
 
 window.addEventListener("resize", onWindowResize);
 
@@ -43,9 +42,9 @@ loader.load(
   "model/OiiaioooooiaiFin.fbx",
   (object) => {
     MyObj = object;
-    scene.add(MyObj);
     MyObj.scale.set(0.1, 0.1, 0.1);
-    MyObj.position.set(0, 0, 0);
+    MyObj.position.set(0, 0, 0);   
+    scene.add(MyObj);
 
     // if (object.animations.length > 0) {
     //   mixer = new THREE.AnimationMixer(MyObj);
