@@ -4,7 +4,7 @@ import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
 
 let container;
 
-let camera, scene, renderer, effect, MyObj, mixer;
+let camera, scene, renderer, effect, MyObj;
 
 container = document.createElement("div");
 document.body.appendChild(container);
@@ -17,7 +17,7 @@ container.appendChild(renderer.domElement);
 //Se crea el efecto PeppersGhost
 effect = new PeppersGhostEffect(renderer);
 effect.setSize(window.innerWidth, window.innerHeight);
-effect.cameraDistance = 12;
+effect.cameraDistance = 90;
 
 window.addEventListener("resize", onWindowResize);
 
@@ -30,6 +30,7 @@ camera = new THREE.PerspectiveCamera(
 
 //Escena
 scene = new THREE.Scene();
+scene.background = new THREE.Color(0x331B26);
 
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
 hemiLight.color.setHSL(10, 10, 10);
@@ -39,19 +40,12 @@ scene.add(hemiLight);
 const loader = new FBXLoader();
 
 loader.load(
-  "model/OiiaioooooiaiFin.fbx",
+  "model/Ghost.fbx",
   (object) => {
     MyObj = object;
-    MyObj.scale.set(0.1, 0.1, 0.1);
-    MyObj.position.set(0, 0, 0);   
+    MyObj.scale.set(0.14, 0.14, 0.14);
+    MyObj.position.set(0, -20, 0);
     scene.add(MyObj);
-
-    // if (object.animations.length > 0) {
-    //   mixer = new THREE.AnimationMixer(MyObj);
-    //   const action = mixer.clipAction(object.animations[0]);
-    //   mixer.stopAllAction();
-    //   action.play();
-    // }
   },
   function (xhr) {
     console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -72,7 +66,7 @@ function onWindowResize() {
 // Animaciones
 function animate() {
   if (MyObj) {
-    MyObj.rotation.y += 0.02;
+    MyObj.rotation.y += 0.01;
   }
   effect.render(scene, camera);
 }
